@@ -136,7 +136,7 @@
     }
     //邮件提醒弹出框
     function modaldemo(e){
-        let path = "https://bzyxt.com:8443/getCaptchaImage"
+        let path = "https://back.bzyxt.com:8443/getCaptchaImage"
         $.ajax({
             type:"POST",                      //请求类型
             url:path,           //URL
@@ -167,7 +167,7 @@
             return
         }
         let codeInput = $("#codeInput").val()
-        let path = "https://bzyxt.com:8443/form_post"
+        let path = "https://back.bzyxt.com:8443/form_post"
         $.ajax({
             type:"POST",                      //请求类型
             url:path,           //URL
