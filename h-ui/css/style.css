@@ -1,0 +1,82 @@
+.circle:hover{ /*鼠标入的时候，伪类元素的动画开始，动画名称就是下面@keyframes定义的circle*/
+    animation: circle 1.5s  ease-out 75ms;
+    -webkit-animation:circle 2s infinite linear ;
+}
+
+.circle:active{ /*鼠标入的时候，伪类元素的动画开始，动画名称就是下面@keyframes定义的circle*/
+    animation: circle 1.5s  ease-out 75ms;
+    -webkit-animation:circle 2s infinite linear ;
+}
+
+@keyframes circle{
+    0% {
+        opacity: 0.1;
+    }
+    10% {
+        opacity: 0.2;
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1); /*三层阴影*/
+    }
+    20% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.4;
+    }
+    30% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.6;
+    }
+    40% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.8;
+    }
+    50% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.8;
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1); /*三层阴影*/
+    }
+    70% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.6;
+    }
+    80% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.4;
+    }
+    90% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.2;
+    }
+    100% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,1), 0 0 10px 10px white, 0 0 0 1px rgba(255,255,255,1);
+        opacity: 0.1;
+    }
+}
+
+#clock {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ffffff;
+    text-align: center;
+    position: absolute;
+    width: 20%  ;
+    margin: 7.6% 85%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #daf6ff;
+    text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}
+#clock .time {
+    letter-spacing: 0.05em;
+    font-size: 30px;
+    padding: 5px 0;
+}
+#clock .date {
+    letter-spacing: 0.1em;
+    font-size: 24px;
+}
+#clock .text {
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    padding: 20px 0 0;
+}
