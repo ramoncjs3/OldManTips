@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+            href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+            rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="css/register.css" />
+    <style>
+        p {text-indent:2em;}
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/tips.js"></script>
+</head>
+<title>官一 老乞丐提醒v0.1</title>
+<body onload="codeImage(this)">
+<div id="main">
+    <div class="vertical-center">
+        <div class="container">
+            <div class="c3">
+                <div class="form-group">
+                    <label for="email">电子邮箱 </label>
+                    <input type="text" class="form-control" id="email" />
+                    <span class="pp hide">此项必须填写</span>
+                </div>
+                <div class="form-group">
+                    <label for="codeInput">验证码 </label>
+                    <input type="codeInput" class="form-control" id="codeInput" />
+                    <span class="pp hide">此项必须填写</span>
+                </div>
+                <div class="form-group">
+                    <img
+                            id="codeImage"
+                            src=""
+                            onclick="codeImage(this)"
+                            class="img-responsive c3"
+                    />
+                </div>
+                <div class="c3-1 ">
+                    <button
+                            type="submit"
+                            class="btn btn-default btn1"
+                            onclick="submitForm(this)"
+                    >
+                        订阅
+                    </button>
+                </div>
+                <div class="form-group test1">
+                    说明:
+                    <p>    1. 默认以邮件方式进行提醒,建议填写QQ邮箱.</p>
+                    <p>    2. 订阅提醒有效期7天,订阅不叠加仅重新统计.</p>
+                    <p>    3. 账号池有限,福缘均未达到阈值将提前告知.</p>
+                    <p>    4. 测试期间程序如有问题还请告知.</p>
+                    <br></br>
+                    <p align="right">Author: 七侠镇法师.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function codeImage(e) {
+        let path = "https://back.bzyxt.com:2096/getCaptchaImage?" + Math.random();
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: path,
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                requestId = data.requestId;
+                $("#codeImage").attr("src", data.image);
+                return data.image;
+            },
+            error: function (data) {},
+        });
+    }
+
+    function submitForm(e) {
+        //debugger
+        let email = $("#email").val();
+        let reg = new RegExp(
+            "^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$"
+        );
+        if (!reg.test(email)) {
+            modalalertdemo(this);
+            {
+                info_prompt("邮箱格式错误");
+            }
+            return;
+        }
+        let codeInput = $("#codeInput").val();
+        let path = "https://back.bzyxt.com:2096/form_post";
+        $.ajax({
+            type: "POST",
+            url: path,
+            data: {
+                email: email,
+                requestId: requestId,
+                codeInput: codeInput,
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status === "true") {
+                    modalalertdemo(1);
+                } else if (data.status === "false") {
+                    modalalertdemo(0);
+                } else {
+                    //验证码错误
+                    modalalertdemo(403);
+                }
+            },
+            error: function (data) {
+                modalalertdemo(0);
+            },
+        });
+    }
+
+    function modalalertdemo(flag) {
+        if (flag == 1) {
+            success_prompt("提交成功");
+        } else if (flag == 0) {
+            info_prompt("提交失败");
+        } else {
+            fail_prompt("验证码错误");
+        }
+    }
+</script>
+</html>
